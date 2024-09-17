@@ -36,12 +36,18 @@ jobs:
           license_codes=$(cat license_codes.txt)
 
           # 更新 README.md
-          echo "## Fetched License Codes" > README.md
+          echo "# GreenHubLicence" > README.md
+          eheo "获取 GreenHub 许可证" >> README.md
+          echo "## 获取到的 GreenHub 许可证 （$current_date 更新）" >> README.md
+          echo "```" >> README.md
           echo "$license_codes" >> README.md
+          echo "```" >> README.md
 
           # 创建日期.md 文件并写入 license_code
-          echo "## License Codes on $current_date" > "$current_date.md"
+          echo "## $current_date 的 GreenHub 许可证" > "$current_date.md"
+          echo "```" >> "$current_date.md"
           echo "$license_codes" >> "$current_date.md"
+          echo "```" >> "$current_date.md"
 
           # 提交更改到仓库
           git config --global user.name "github-actions[bot]"
