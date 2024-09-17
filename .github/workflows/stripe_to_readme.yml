@@ -1,4 +1,4 @@
-name: Update README and Date file with Stripe Customers
+name: Update README and Date File with Stripe License Codes
 
 on:
   push:
@@ -7,45 +7,45 @@ on:
   workflow_dispatch:
 
 jobs:
-  update_files:
+  update_readme:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install jq and date command
-        run: sudo apt-get install jq -y
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-      - name: Fetch customers from Stripe and update files
-        env:
-          STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
+      - name: Install dependencies
         run: |
-          # Fetch customers from Stripe API
-          echo "Fetching customers from Stripe API..."
-          response=$(curl -s -X GET https://api.stripe.com/v1/customers \
-          -H "Authorization: Bearer $STRIPE_API_KEY")
+          python -m pip install --upgrade pip
+          pip install requests
 
-          # Parse JSON and extract license_code from metadata
-          license_codes=$(echo "$response" | jq -r '.data[] | .metadata.license_code // "No license code"')
+      - name: Run get.py to fetch license codes from Stripe
+        run: python get.py
 
-          # Get current date
+      - name: Update README.md and Date.md with fetched license codes
+        run: |
+          # 获取当前日期
           current_date=$(date +"%Y-%m-%d")
 
-          # Update README.md file
-          echo "## License Codes" > README.md
+          # 读取获取到的 license_code 信息（get.py 的输出）
+          license_codes=$(cat license_codes.txt)
+
+          # 更新 README.md
+          echo "## Fetched License Codes" > README.md
           echo "$license_codes" >> README.md
 
-          # Create a new file with the current date
+          # 创建日期.md 文件并写入 license_code
           echo "## License Codes on $current_date" > "$current_date.md"
           echo "$license_codes" >> "$current_date.md"
 
-      - name: Commit and push changes
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-
-          git add README.md
-          git add *.md
-          git commit -m "Update README.md and add $current_date.md"
+          # 提交更改到仓库
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md "$current_date.md"
+          git commit -m "Updated README.md and added $current_date.md"
           git push
