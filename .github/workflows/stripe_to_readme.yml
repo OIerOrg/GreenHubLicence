@@ -34,6 +34,7 @@ jobs:
 
           # 读取获取到的 license_code 信息（get.py 的输出）
           license_codes=$(cat license_codes.txt)
+          echo "$license_codes"
 
           # 更新 README.md
           echo "# GreenHubLicence" > README.md
