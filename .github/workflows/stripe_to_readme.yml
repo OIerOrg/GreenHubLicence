@@ -1,5 +1,3 @@
-name: Update README and Date File with Stripe License Codes
-
 on:
   push:
     branches:
@@ -31,6 +29,10 @@ jobs:
       - name: Run get.py to fetch license codes from Stripe
         run: python get.py
 
+      # 检查 license_codes.txt 文件内容
+      - name: Check license_codes.txt content
+        run: cat license_codes.txt
+
       # 更新 README.md 和日期文件
       - name: Update README.md and Date.md with fetched license codes
         run: |
@@ -45,6 +47,7 @@ jobs:
 
           # 读取获取到的 license_code 信息
           license_codes=$(cat license_codes.txt)
+          echo "Fetched license codes:"
           echo "$license_codes"
 
           # 更新 README.md
