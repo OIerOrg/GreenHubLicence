@@ -37,7 +37,7 @@ jobs:
 
           # 更新 README.md
           echo "# GreenHubLicence" > README.md
-          eheo "获取 GreenHub 许可证" >> README.md
+          echo "获取 GreenHub 许可证" >> README.md
           echo "## 获取到的 GreenHub 许可证 （$current_date 更新）" >> README.md
           echo "```" >> README.md
           echo "$license_codes" >> README.md
