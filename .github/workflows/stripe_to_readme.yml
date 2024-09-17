@@ -37,13 +37,13 @@ jobs:
         run: cat license_codes.txt
 
       # 更新 README.md 和日期文件
-            # 更新 README.md 和日期文件
       - name: Update README.md and Date.md with fetched license codes
         run: |
           # 获取当前日期
           current_year=$(date +"%Y")
           current_month=$(date +"%m")
-          current_date=$(date +"%Y/%m/%d")
+          current_day=$(date +"%d")  # 单独获取日期天数
+          current_date=$(date +"%Y-%m-%d")  # 使用 - 作为分隔符，避免路径问题
           
           # 创建目录（如果不存在则递归创建）
           mkdir -p "$current_year/$current_month"
@@ -53,12 +53,12 @@ jobs:
             echo "license_codes.txt 文件为空或不存在，停止执行."
             exit 1
           fi
-
+          
           # 读取获取到的 license_code 信息
           license_codes=$(cat license_codes.txt)
           echo "Fetched license codes:"
           echo "$license_codes"
-
+          
           # 更新 README.md
           echo "# GreenHubLicence" > README.md
           echo "获取 GreenHub 许可证" >> README.md
@@ -66,12 +66,13 @@ jobs:
           echo "\`\`\`" >> README.md
           cat license_codes.txt >> README.md
           echo "\`\`\`" >> README.md
-
+          
           # 创建日期.md 文件并写入 license_code
-          echo "## $current_date 的 GreenHub 许可证" > "$current_year/$current_month/$current_date.md"
-          echo "\`\`\`" >> "$current_year/$current_month/$current_date.md"
-          cat license_codes.txt >> "$current_year/$current_month/$current_date.md"
-          echo "\`\`\`" >> "$current_year/$current_month/$current_date.md"
+          echo "## $current_date 的 GreenHub 许可证" > "$current_year/$current_month/$current_day.md"
+          echo "\`\`\`" >> "$current_year/$current_month/$current_day.md"
+          cat license_codes.txt >> "$current_year/$current_month/$current_day.md"
+          echo "\`\`\`" >> "$current_year/$current_month/$current_day.md"
+
 
 
       # 提交并推送更改
