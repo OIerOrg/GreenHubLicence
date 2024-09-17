@@ -41,13 +41,13 @@ jobs:
           echo "获取 GreenHub 许可证" >> README.md
           echo "## 获取到的 GreenHub 许可证 （$current_date 更新）" >> README.md
           echo "```" >> README.md
-          echo "$license_codes" >> README.md
+          cat license_codes.txt >> README.md
           echo "```" >> README.md
 
           # 创建日期.md 文件并写入 license_code
           echo "## $current_date 的 GreenHub 许可证" > "$current_date.md"
           echo "```" >> "$current_date.md"
-          echo "$license_codes" >> "$current_date.md"
+          cat license_codes.txt >>  "$current_date.md"
           echo "```" >> "$current_date.md"
 
           # 提交更改到仓库
