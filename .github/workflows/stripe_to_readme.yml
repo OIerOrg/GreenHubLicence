@@ -40,7 +40,7 @@ jobs:
       - name: Update README.md and Date.md with fetched license codes
         run: |
           # 获取当前日期
-          current_date=$(date +"%Y\%m\%d")
+          current_date=$(date +"%Y\/%m\/%d")
           # 检查 license_codes.txt 是否存在且不为空
           if [ ! -s license_codes.txt ]; then
             echo "license_codes.txt 文件为空或不存在，停止执行."
