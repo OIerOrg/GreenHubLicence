@@ -43,6 +43,7 @@ jobs:
           current_year=$(date +"%Y")
           current_month=$(date +"%m")
           current_day=$(date +"%d")
+          current_hour=$(date +"%H")
           current_date=$(date +"%Y-%m-%d %H : 00")  # 使用年月日和小时分钟
 
           # 创建目录（如果不存在则递归创建），按年、月、日、小时存储
