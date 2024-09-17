@@ -1,3 +1,5 @@
+yaml
+Copy code
 name: Update README and Date File with Stripe License Codes
 
 on:
@@ -11,28 +13,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 检出仓库
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 设置 Python 环境
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
+      # 安装依赖
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install requests
 
+      # 运行 get.py 从 Stripe 获取许可证代码
       - name: Run get.py to fetch license codes from Stripe
         run: python get.py
 
+      # 更新 README.md 和日期文件
       - name: Update README.md and Date.md with fetched license codes
         run: |
           # 获取当前日期
           current_date=$(date +"%Y-%m-%d")
 
-          # 读取获取到的 license_code 信息（get.py 的输出）
+          # 检查 license_codes.txt 是否存在且不为空
+          if [ ! -s license_codes.txt ]; then
+            echo "license_codes.txt 文件为空或不存在，停止执行."
+            exit 1
+          fi
+
+          # 读取获取到的 license_code 信息
           license_codes=$(cat license_codes.txt)
           echo "$license_codes"
 
@@ -47,12 +60,21 @@ jobs:
           # 创建日期.md 文件并写入 license_code
           echo "## $current_date 的 GreenHub 许可证" > "$current_date.md"
           echo "```" >> "$current_date.md"
-          cat license_codes.txt >>  "$current_date.md"
+          cat license_codes.txt >> "$current_date.md"
           echo "```" >> "$current_date.md"
 
-          # 提交更改到仓库
+      # 提交并推送更改
+      - name: Commit and push changes
+        run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md "$current_date.md"
           git commit -m "Updated README.md and added $current_date.md"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 可选：确保 license_codes.txt 文件不被提交（如果不需要）
+      - name: Clean up untracked files (optional)
+        run: |
+          git rm --cached license_codes.txt || true
