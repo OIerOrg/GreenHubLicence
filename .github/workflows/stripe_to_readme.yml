@@ -71,8 +71,3 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # 可选：确保 license_codes.txt 文件不被提交（如果不需要）
-      - name: Clean up untracked files (optional)
-        run: |
-          git rm --cached license_codes.txt || true
