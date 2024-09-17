@@ -3,7 +3,7 @@ on:
     branches:
       - main
   schedule:
-      - cron: "0 0 * * *"  # 每天
+      - cron: "0 * * * *"  # 每小时运行一次
   workflow_dispatch:
 
 
@@ -39,14 +39,14 @@ jobs:
       # 更新 README.md 和日期文件
       - name: Update README.md and Date.md with fetched license codes
         run: |
-          # 获取当前日期
+          # 获取当前日期和小时
           current_year=$(date +"%Y")
           current_month=$(date +"%m")
-          current_day=$(date +"%d")  # 单独获取日期天数
-          current_date=$(date +"%Y-%m-%d")  # 使用 - 作为分隔符，避免路径问题
-          
-          # 创建目录（如果不存在则递归创建）
-          mkdir -p "$current_year/$current_month"
+          current_day=$(date +"%d")
+          current_date=$(date +"%Y-%m-%d %H : 00")  # 使用年月日和小时分钟
+
+          # 创建目录（如果不存在则递归创建），按年、月、日、小时存储
+          mkdir -p "$current_year/$current_month/$current_day"
           
           # 检查 license_codes.txt 是否存在且不为空
           if [ ! -s license_codes.txt ]; then
@@ -67,12 +67,11 @@ jobs:
           cat license_codes.txt >> README.md
           echo "\`\`\`" >> README.md
           
-          # 创建日期.md 文件并写入 license_code
-          echo "## $current_date 的 GreenHub 许可证" > "$current_year/$current_month/$current_day.md"
-          echo "\`\`\`" >> "$current_year/$current_month/$current_day.md"
-          cat license_codes.txt >> "$current_year/$current_month/$current_day.md"
-          echo "\`\`\`" >> "$current_year/$current_month/$current_day.md"
-
+          # 创建日期和小时的 .md 文件并写入 license_code
+          echo "## $current_date 的 GreenHub 许可证" > "$current_year/$current_month/$current_day/$current_hour.md"
+          echo "\`\`\`" >> "$current_year/$current_month/$current_day/$current_hour.md"
+          cat license_codes.txt >> "$current_year/$current_month/$current_day/$current_hour.md"
+          echo "\`\`\`" >> "$current_year/$current_month/$current_day/$current_hour.md"
 
 
       # 提交并推送更改
