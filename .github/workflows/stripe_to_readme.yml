@@ -1,5 +1,3 @@
-yaml
-Copy code
 name: Update README and Date File with Stripe License Codes
 
 on:
