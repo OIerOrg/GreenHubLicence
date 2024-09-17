@@ -1,0 +1,51 @@
+name: Update README and Date file with Stripe Customers
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  update_files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install jq and date command
+        run: sudo apt-get install jq -y
+
+      - name: Fetch customers from Stripe and update files
+        env:
+          STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
+        run: |
+          # Fetch customers from Stripe API
+          echo "Fetching customers from Stripe API..."
+          response=$(curl -s -X GET https://api.stripe.com/v1/customers \
+          -H "Authorization: Bearer $STRIPE_API_KEY")
+
+          # Parse JSON and extract license_code from metadata
+          license_codes=$(echo "$response" | jq -r '.data[] | .metadata.license_code // "No license code"')
+
+          # Get current date
+          current_date=$(date +"%Y-%m-%d")
+
+          # Update README.md file
+          echo "## License Codes" > README.md
+          echo "$license_codes" >> README.md
+
+          # Create a new file with the current date
+          echo "## License Codes on $current_date" > "$current_date.md"
+          echo "$license_codes" >> "$current_date.md"
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+          git add README.md
+          git add *.md
+          git commit -m "Update README.md and add $current_date.md"
+          git push
