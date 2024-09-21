@@ -1,7 +1,8 @@
 # GreenHubLicence
 获取 GreenHub 许可证
-## 获取到的 GreenHub 许可证 （2024-09-21 12 : 00 更新）
+## 获取到的 GreenHub 许可证 （2024-09-21 13 : 00 更新）
 ```
+QtFb-wrqi-P81U-W5C8-51F9
 QtDR-LwhT-R54k-VDC8-22C9
 QtBs-4SCk-4UB1-QiC8-DE94
 QtBc-xwkr-iUle-VwC8-89C2
@@ -11,5 +12,4 @@ QtBA-3RXi-E1Lo-r1C8-D691
 Qt6o-dEiF-ikCK-7CC8-CACD
 Qt6L-ezJY-1JDZ-tdC8-CBE9
 Qt5e-KTwh-0s77-LGC8-94B0
-Qt59-h1he-3Qr5-OhC8-71AA
 ```
