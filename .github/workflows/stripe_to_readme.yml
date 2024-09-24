@@ -61,7 +61,8 @@ jobs:
           echo "$license_codes"
           
           # 更新 README.md
-          echo "# GreenHubLicence" > README.md
+          echo "[![.github/workflows/stripe_to_readme.yml](https://github.com/zjx-kimi/GreenHubLicence/actions/workflows/stripe_to_readme.yml/badge.svg)](https://github.com/zjx-kimi/GreenHubLicence/actions/workflows/stripe_to_readme.yml)" > README.md
+          echo "# GreenHubLicence" >> README.md
           echo "获取 GreenHub 许可证" >> README.md
           echo "## 获取到的 GreenHub 许可证 （$current_date 更新）" >> README.md
           echo "\`\`\`" >> README.md
