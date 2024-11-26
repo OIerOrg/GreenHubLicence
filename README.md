@@ -1,7 +1,7 @@
 [![.github/workflows/stripe_to_readme.yml](https://github.com/zjx-kimi/GreenHubLicence/actions/workflows/stripe_to_readme.yml/badge.svg)](https://github.com/zjx-kimi/GreenHubLicence/actions/workflows/stripe_to_readme.yml)
 # GreenHubLicence
 获取 GreenHub 许可证
-## 获取到的 GreenHub 许可证 （2024-11-26 20 : 00 更新）
+## 获取到的 GreenHub 许可证 （2024-11-26 21 : 00 更新）
 ```
 RI1x-M1Pt-ID3Y-iGC8-DC7E
 RHz5-2L9U-hEc0-UkC8-BA84
