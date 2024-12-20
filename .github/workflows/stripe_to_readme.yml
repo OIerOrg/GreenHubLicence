@@ -68,6 +68,8 @@ jobs:
           echo "\`\`\`" >> README.md
           cat license_codes.txt >> README.md
           echo "\`\`\`" >> README.md
+          echo -e "\n## 注意事项\n\n本项目的代码仅限用于科学研究目的，请勿将其用于其他用途。\n" >> README.md
+
           
           # 创建日期和小时的 .md 文件并写入 license_code
           echo "## $current_date 的 GreenHub 许可证" > "$current_year/$current_month/$current_day/$current_hour.md"
