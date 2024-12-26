@@ -1,18 +1,18 @@
 [![.github/workflows/stripe_to_readme.yml](https://github.com/zjx-kimi/GreenHubLicence/actions/workflows/stripe_to_readme.yml/badge.svg)](https://github.com/zjx-kimi/GreenHubLicence/actions/workflows/stripe_to_readme.yml)
 # GreenHubLicence
 获取 GreenHub 许可证
-## 获取到的 GreenHub 许可证 （2024-12-26 11 : 00 更新）
+## 获取到的 GreenHub 许可证 （2024-12-26 12 : 00 更新）
 ```
+RTCP-1ljt-B3ax-miC8-2C08
+RTCM-kfd1-xByF-zHC8-6507
+RTCG-Kr9e-qqit-1oC8-291A
+RTCA-48BI-Pdrg-KtC8-AA9C
+RTBx-O71K-cZEW-O1C8-456A
+RTBg-NAOG-I8Ai-yMC8-5294
 RT7x-WgQ5-BsEV-W8C8-6EA7
 RT7k-UNdZ-uJlI-8zC8-13FE
 RT66-Iq4J-N9nl-1vC8-B381
 RT5j-dd6f-PYFf-lIC8-5AE2
-RT5Z-bPhz-99Ff-I2C8-D391
-RT3y-GfdH-rl8w-vMC8-452B
-RT3v-nBGy-mbcl-hgC8-715C
-RT3Y-6WW7-M6F8-VTC8-1D27
-RT2d-94MS-MMtb-7yC8-5598
-RT2O-Kgl7-ckct-2kC8-C2ED
 ```
 
 ## 注意事项
